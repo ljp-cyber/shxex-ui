@@ -1,0 +1,89 @@
+<template>
+	<auto-bg-management :models="models"></auto-bg-management>
+</template>
+
+<script>
+	export default{
+		name:'auto-bg-management-view',
+		data:()=>{
+			return {
+				getModelsByBG:false,
+				models:{
+					name:'商城后台管理系统',
+					url:'http://localhost:8080',
+					loginUrl:'/login',
+					childModels:[{
+						name:'用户管理',
+						url:'/usermanage',
+						childModel:[{
+							name:'用户信息',
+							url:'/user',
+							queryUrl:'/query',
+							queryMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'DELETE',
+							insertUrl:'/register',
+							insertMethod:'PUT',
+							updateUrl:'/update',
+							updateMethod:'POST',
+							queryModel:{
+								key:null,
+								beginAge:null,
+								endAge:null,
+								role:null
+							},
+							insertModel:{
+								id:null,
+								name:null,
+								nick_name:null,
+								icon:null,
+								birthday:null,
+								password:null,
+								sex:null,
+								phone:null,
+								email:null,
+								role:null
+							}
+						},{
+							name:'安全信息',
+							url:'/userSafe',
+							queryUrl:'/query',
+							deleteUrl:'/delete',
+							insertUrl:'/insert',
+							updateUrl:'/update'
+						}],
+					},{
+						name:'商品类别',
+						url:'/categorymanage',
+						childModel:[{
+							name:'商品类别',
+							url:'/category',
+							queryUrl:'/query',
+							queryMethod:'POST',
+							deleteUrl:'/delete',
+							insertUrl:'/insert',
+							insertMethod:'PUT',
+							updateUrl:'/update',
+							queryModel:{
+								page:''
+							},
+							insertModel:{
+								id:null,
+								name:null,
+								icon:null,
+								represent:null
+							}
+						},{
+							name:'品牌',
+							url:'/brand',
+							queryUrl:'/query',
+							deleteUrl:'/delete',
+							insertUrl:'/insert',
+							updateUrl:'/update'
+						}],
+					}],
+				}
+			}
+		}
+	}
+</script>

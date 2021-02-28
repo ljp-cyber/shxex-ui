@@ -1,7 +1,6 @@
-# shoppingmall
+# autoBackground
 
-> 商城
-
+> 该项目为自适应后台管理系统，目地是简化开发过程中对数据库增删改查测试流程，只需绑定后台增删改查接口即可实现增删改查测试。该项目以vue为前端框架，二次封装elmentui，实现了autoTable、autoForm、autoBackground组件。
 ## Build Setup
 
 ``` bash

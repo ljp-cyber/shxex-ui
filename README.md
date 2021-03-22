@@ -8,6 +8,7 @@
 ├── build --项目构建(webpack)相关代码
 ├── config  --配置目录，包括端口号等
 ├── node_modules    --npm 加载的项目依赖模块
+├── lib --把组件打包成js后的文件存放目录
 ├── examples    --用于展示组件的demo，把程序主入口配置在这里了
 ├── packages    --组件代码
 ├── static  --静态资源目录，如图片、字体等

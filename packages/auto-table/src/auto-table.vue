@@ -8,7 +8,7 @@
       <template v-else-if="item.type=='options'&&options.length">
         <el-table-column :label="item.label" :width="item.width" :fixed="item.fixed">
 	      	<template slot="header" slot-scope="scope">
-	      		<el-button size='small' @click="deleteSelections" type="danger"">删除选中的项</el-button>
+	      		<el-button size='small' @click="deleteSelections" type="danger">删除选中的项</el-button>
 	      	</template>
           <template slot-scope="scope">
             <template v-for="btn in options">

@@ -47,23 +47,26 @@
 						},{
 							name:'安全信息',
 							url:'/userSafe',
-							queryUrl:'/query',
+							queryUrl:'/list',
+							queryMethod:'GET',
 							deleteUrl:'/delete',
 							insertUrl:'/insert',
 							updateUrl:'/update'
 						}],
 					},{
 						name:'商品类别',
-						url:'/categorymanage',
+						url:'/tc/shop/goods',
 						childModel:[{
 							name:'商品类别',
 							url:'/category',
-							queryUrl:'/query',
+							queryUrl:'/list',
 							queryMethod:'POST',
 							deleteUrl:'/delete',
+							deleteMethod:'DELETE',
 							insertUrl:'/insert',
 							insertMethod:'PUT',
 							updateUrl:'/update',
+							updateMethod:'POST',
 							queryModel:{
 								page:''
 							},
@@ -76,10 +79,14 @@
 						},{
 							name:'品牌',
 							url:'/brand',
-							queryUrl:'/query',
+							queryUrl:'/list',
+							queryMethod:'GET',
 							deleteUrl:'/delete',
+							deleteMethod:'DELETE',
 							insertUrl:'/insert',
-							updateUrl:'/update'
+							insertMethod:'PUT',
+							updateUrl:'/update',
+							updateMethod:'POST'
 						}],
 					}],
 				}

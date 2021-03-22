@@ -1,7 +1,7 @@
 {
   "name": "@shxex/autobg",
   "version": "1.0.0",
-  "description": "商城",
+  "description": "后台管理系统",
   "author": "李俊鹏",
   "private": false,
   "main": "./dist/component-library-gao.common.js",

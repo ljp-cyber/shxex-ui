@@ -113,6 +113,7 @@
 				return res;
 			},
 			select(index,path){
+				//选择板块时绑定查询模型
 				//console.log('select:'+index+','+path);
 				this.baseUrl=this.models.url;
 				var curModels=this.models;
@@ -130,72 +131,99 @@
 				console.log(this.baseUrl);
 				this.tableData=[];
 			},
+			// doAjax(this.curModel.updateUrl,method,data,suc,this.failTips());
+			// this.doAjax1(url,this.baseUrl,method,params,null,suc,fail);
 			doAjaxProcess(url,base,method,params,data,suc,fail){
-				console.log("请求即将执行，url是："+this.baseUrl+url)
+				if(params==null)params=data
+				console.log("请求即将执行，url是："+base)
+				console.log("请求即将执行，url是："+url)
 				console.log("请求参数是："+params)
 				console.log("请求数据是："+data)
+				let ref = this;
 				this.$axios({
 					method:method,
 					baseURL:base,
 					url:url,
 					params:params,
-					data:data,
+					data:params,
 					headers:{
 						'jwt-token':this.token,
 						// 'Access-Control-Allow-Origin':'*',
 						// 'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept, client_id, uuid, Authorization',
 						// 'Access-Control-Allow-Method':'GET,POST,PUT,DELETE',
-						'User-Agent' : 'WEB'
+						// 'User-Agent' : 'WEB'
 					}
 				}).then(suc).catch(fail);
 				// .then((response) => {
 				// 	console.log('success')
 				// 	this.responseSuccessHandler(response);
 				// 	suc(response);
-				// }).catch(function (error) { // 请求失败根据状态码处理
-				// 	console.log('error'+error);
+				// })
+				// .catch(function (error) { // 请求失败根据状态码处理
+				// 	ref.writeObj(error.response)
+				// 	console.log('error'+error.response);
 				// });
 			},
 			doGet(url,method,params,suc,fail){
-				this.doAjax1(url,this.baseUrl,method,params,null,suc,fail);
+				this.doAjaxProcess(url,this.baseUrl,method,params,null,suc,fail);
 			},
 			doPost(url,method,data,suc,fail){
-				this.doAjax1(url,this.baseUrl,method,null,data,suc,fail);
+				this.doAjaxProcess(url,this.baseUrl,method,null,data,suc,fail);
+			},
+			doAjax(url,method,data,suc,fail){
+				if(method=='GET'){
+					this.doGet(url,method,data,suc,fail);
+				}else{
+					this.doPost(url,method,data,suc,fail);
+				}
 			},
 			getTips(type,tips){//加了type
 				var ref=this;
 				function fail(){
 					ref.$message({
-            type: 'warning',
-            message: tips
-          });
+						type: type,
+						message: tips
+					});
 				}
 				return fail;
 			},
+			writeObj(obj){ 
+				var description = ""; 
+				for(var i in obj){ 
+					var property=obj[i]; 
+					description+=i+" = "+property+"\n"; 
+				} 
+				console.log(description); 
+			},
 			failTips(){
 				var ref=this;
-				function fail(){
+				function fail(err){
+					// console.log(err)
+					// ref.writeObj(err);
+					let res = err.response;
 					ref.$message({
-            type: 'warning',
-            message: '请求处理失败，请检查网络后重试'
-          });
+						type: 'warning',
+						message: '请求处理失败，err='+err
+					});
+					ref.responseFailHandler(res);
 				}
 				return fail;
 			},
 			doTips(tipsText,doSomething){
-				this.$confirm(tipsText, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-        .then(doSomething)
-        .catch((error) => {
-        	console.log(error);
-          this.$message({
-            type: 'info',
-            message: '已取消'
-          });
-        });
+				this.$confirm(
+					tipsText, '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				})
+				.then(doSomething)
+				.catch((error) => {
+					console.log(error);
+					this.$message({
+						type: 'info',
+						message: '已取消'
+					});
+        		});
 			},
 			doDelete(data){
 				var that=this;
@@ -241,6 +269,7 @@
 			doQuery(data){
 				var that=this;
 				function suc(response){
+					console.log("success");
 					console.log(response.data);
 					if(Array.isArray(response.data))
 						that.tableData=response.data;
@@ -249,6 +278,7 @@
 				// 	console.log('fail');
 				// 	that.tableData=that.testData();
 				// }
+				console.log(this.curModel.queryUrl);
 				var method=this.curModel.queryMethod?this.curModel.queryMethod:'POST';
 				this.doAjax(this.curModel.queryUrl,method,data,suc,this.failTips());
 			},
@@ -318,14 +348,21 @@
 				function suc(response){
 					console.log(response.data)
 					that.token=response.data;
-					var temp =  that.getTips("登录成功");
+					var temp =  that.getTips("warning","登录成功");
 					temp();
 					that.user.username=null;
 					that.user.password=null;
+					that.loginFormVisible=false;
+
 				}
 				var method=this.models.loginMethod?this.models.loginMethod:'POST';
-				console.log(this.user+','+this.models.url );
-				this.doAjax1(this.models.loginUrl,this.models.url ,method,this.user,suc,this.failTips());
+				console.log(this.user.username+","+this.user.password+','+this.models.url );
+
+				if(method=='GET'){
+					this.doAjaxProcess(this.models.loginUrl,this.models.url,method,this.user,null,suc,this.failTips());
+				}else {
+					this.doAjaxProcess(this.models.loginUrl,this.models.url,method,null,this.user,suc,this.failTips());
+				}
 			},
 			responseSuccessHandler(response){
 				console.log("回应处理方法responseSuccessHandler(response)：数据是："+response.data)
@@ -334,8 +371,12 @@
 				}
 			},
 			responseFailHandler(response){
+				if(response==undefined){
+					console.log("回应处理方法responseFalseHandler(response)：数据是：undefined")
+					return;
+					}
 				console.log("回应处理方法responseFalseHandler(response)：数据是："+response.status)
-				if(response.status==407){
+				if(response.status==401){
 					this.loginFormVisible=true;
 				}
 			}

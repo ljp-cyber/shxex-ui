@@ -22,7 +22,7 @@
           :readonly="!edit"
           :name="item.key"
           :placeholder="item.placeholder ? item.placeholder : item.key"
-          show-password="'false'"
+          :show-password="true"
         ></el-input>
         <!-- 选择 -->
         <el-select

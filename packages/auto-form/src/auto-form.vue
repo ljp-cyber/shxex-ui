@@ -16,6 +16,14 @@
           :name="item.key"
           :placeholder="item.placeholder ? item.placeholder : item.key"
         ></el-input>
+        <el-input
+          v-else-if="item.type == 'pw'"
+          v-model="model[item.key]"
+          :readonly="!edit"
+          :name="item.key"
+          :placeholder="item.placeholder ? item.placeholder : item.key"
+          show-password="'false'"
+        ></el-input>
         <!-- 选择 -->
         <el-select
           v-else-if="item.type == 'options' && item.options.length"
@@ -130,6 +138,7 @@ export default {
     defForm() {
       var res = [];
       for (var curKey in this.model) {
+        console.log(curKey);
         var curtype = "input";
         var curoptions = null;
         if (curKey.indexOf("sex") >= 0) {
@@ -137,6 +146,8 @@ export default {
           curoptions = [{ value: "男" }, { value: "女" }];
         } else if (curKey.indexOf("date") >= 0 || curKey.indexOf("day") >= 0) {
           curtype = "date2";
+        } else if(curKey.indexOf("password")>=0){
+          curtype = "pw";
         }
         res.push({ type: curtype, key: curKey, options: curoptions });
       }

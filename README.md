@@ -38,7 +38,7 @@ form（配置显示类型，支持日期、文本性别选择、密码，默认�
 1. data：为table的填充数据，根据json的key识别为图片、日期等显示形式
 2. header：为头部数据，默认为json的key值，可配置。
 3. table：是个对象、支持两个表格样式stripe: true, //是否为斑马纹、loading: false, // 数据加载loading显示
-4. 
+
 ### auto-bg
 
 该组件依赖auto-form、auto-bg、axios。auto-bg组件有一个绑定属性models为一个对象，有如下属性：

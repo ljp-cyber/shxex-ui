@@ -18,21 +18,29 @@
 ├── README.md   --项目的说明文档，markdown 格式
 ```
 ## 项目演示
+
 <img src = "www.shxex.cn:8080/autobg/img/autobglogin.png">
+
 [http://www.shxex.cn:8080/autobg/](http://www.shxex.cn:8080/autobg/)
 
 ## 组件介绍
+
 ### auto-form
+
 该组件依赖element-ui。有几个绑定属性：
 disabled、edit、inline（行内表单）、pickerOptions（日期选择框）、model（数据模型）、
 form（配置显示类型，支持日期、文本性别选择、密码，默认根据model名字识别）
 提交栏支持插槽扩展其他按钮
+
 ### auto-table
+
 该组件依赖element-ui。有三个绑定属性：
 1. data：为table的填充数据，根据json的key识别为图片、日期等显示形式
 2. header：为头部数据，默认为json的key值，可配置。
 3. table：是个对象、支持两个表格样式stripe: true, //是否为斑马纹、loading: false, // 数据加载loading显示
+4. 
 ### auto-bg
+
 该组件依赖auto-form、auto-bg、axios。auto-bg组件有一个绑定属性models为一个对象，有如下属性：
 - name:系统的名字
 - url:连接后台的域名，调试时通常为http://localhost:8080/xxx
@@ -41,7 +49,9 @@ form（配置显示类型，支持日期、文本性别选择、密码，默认�
 - childModel:name,url和增删改查对应的url,method(get pos ...)和参数
 另外该组件支持jwt登录，权限不够时java后台返回401状态码，自动进入登录画面。
 输入账号密码点击提交就会访问loginUrl，java后端需要返回token，下次访问即携带token访问
+
 ## Build Setup
+
 1. 安装nodejs环境（javascript运行环境）
 2. 安装npm模块管理工具、cnpm支持中国模块镜像
 3. 全局安装vue、vue-cli

@@ -8,7 +8,7 @@
 <script>
 	var user={'username':'李俊鹏','password':'123456'};
 	export default {
-		name: 'testTest1',
+		name: 'testAxios',
 		methods: {
 			onClick(){
 

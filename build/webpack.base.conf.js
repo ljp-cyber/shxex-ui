@@ -4,16 +4,15 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
-
 
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './examples/main.js'
+    app: './examples/main.js'//dev
   },
   output: {
     path: config.build.assetsRoot,
@@ -26,7 +25,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      '@': resolve('examples'),
     }
   },
   module: {
@@ -39,13 +38,13 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('examples'), resolve('test'), resolve('node_modules/webpack-dev-server/client'),resolve('packages')]
+        include: [resolve('examples'), resolve('test'), resolve('node_modules/webpack-dev-server/client'), resolve('packages')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
+          limit: 90000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
@@ -53,7 +52,7 @@ module.exports = {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
+          limit: 90000,
           name: utils.assetsPath('media/[name].[hash:7].[ext]')
         }
       },
@@ -61,7 +60,7 @@ module.exports = {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
+          limit: 90000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
@@ -78,18 +77,5 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
-  },
-  // 为packages目录添加babel-loader处理
-  // chainWebpack: config => {
-  //   config.module
-  //   .rule('js')
-  //   .include
-  //       .add(resolve('packages'))
-  //       .end()
-  //   .use('babel')
-  //       .loader('babel-loader')
-  //       .tap(options => {
-  //           return options
-  //       })
-  //   }
+  }
 }

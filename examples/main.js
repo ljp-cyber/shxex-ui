@@ -10,8 +10,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-//测试页面
-import Test from '../packages/test/index'
+//测试Vue页面
+import Test from '../packages/testVue/index'
 Vue.use(Test)
 
 import Axios from 'axios'
@@ -22,23 +22,19 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
-//自动表格开发
 import AutoTable from '../packages/auto-table/index'
 Vue.use(AutoTable)
 
 import AutoForm from '../packages/auto-form/index'
 Vue.use(AutoForm)
 
-import AutoBGManagement from '../packages/auto-bg-management/index'
-Vue.use(AutoBGManagement)
+import AutoBG from '../packages/auto-bg/index'
+Vue.use(AutoBG)
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  //el: '#app',
   router,
-  //components: { App },
-  //template: '<App/>'
   render: h => h(App)
 }).$mount('#app')

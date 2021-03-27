@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <title>first</title>
+</head>
+
+<body>
+    <div id="app1">
+        <auto-bg :models="models"></auto-bg>
+    </div>
+    <link rel="stylesheet" type="text/css" href="css/element-index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/element-index.js"></script>
+    <script src="shxex-ui.js"></script>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: '#app1',
+            data() {
+                return {
+                    getModelsByBG: false,
+                    models: {
+                        name: '商城后台管理系统',
+                        url: 'http://localhost:8080',
+                        loginUrl: '/login',
+                        childModels: [{
+                            name: '用户管理',
+                            url: '/usermanage',
+                            childModel: [{
+                                name: '用户信息',
+                                url: '/user',
+                                queryUrl: '/query',
+                                queryMethod: 'POST',
+                                deleteUrl: '/delete',
+                                deleteMethod: 'DELETE',
+                                insertUrl: '/register',
+                                insertMethod: 'PUT',
+                                updateUrl: '/update',
+                                updateMethod: 'POST',
+                                queryModel: {
+                                    key: null,
+                                    beginAge: null,
+                                    endAge: null,
+                                    role: null
+                                },
+                                insertModel: {
+                                    id: null,
+                                    name: null,
+                                    nick_name: null,
+                                    icon: null,
+                                    birthday: null,
+                                    password: null,
+                                    sex: null,
+                                    phone: null,
+                                    email: null,
+                                    role: null
+                                }
+                            }, {
+                                name: '安全信息',
+                                url: '/userSafe',
+                                queryUrl: '/list',
+                                queryMethod: 'GET',
+                                deleteUrl: '/delete',
+                                insertUrl: '/insert',
+                                updateUrl: '/update'
+                            }],
+                        }, {
+                            name: '商品类别',
+                            url: '/tc/shop/goods',
+                            childModel: [{
+                                name: '商品类别',
+                                url: '/category',
+                                queryUrl: '/list',
+                                queryMethod: 'POST',
+                                deleteUrl: '/delete',
+                                deleteMethod: 'DELETE',
+                                insertUrl: '/insert',
+                                insertMethod: 'PUT',
+                                updateUrl: '/update',
+                                updateMethod: 'POST',
+                                queryModel: {
+                                    page: ''
+                                },
+                                insertModel: {
+                                    id: null,
+                                    name: null,
+                                    icon: null,
+                                    represent: null
+                                }
+                            }, {
+                                name: '品牌',
+                                url: '/brand',
+                                queryUrl: '/list',
+                                queryMethod: 'GET',
+                                deleteUrl: '/delete',
+                                deleteMethod: 'DELETE',
+                                insertUrl: '/insert',
+                                insertMethod: 'PUT',
+                                updateUrl: '/update',
+                                updateMethod: 'POST'
+                            }],
+                        }],
+                    }
+                }
+            },
+            methods: {
+                beforeMouths() {
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

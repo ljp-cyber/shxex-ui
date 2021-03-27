@@ -1,10 +1,10 @@
 <template>
-	<auto-bg-management :models="models"></auto-bg-management>
+	<auto-bg :models="models"></auto-bg>
 </template>
 
 <script>
 	export default{
-		name:'auto-bg-management-view',
+		name:'auto-bg-view',
 		data:()=>{
 			return {
 				getModelsByBG:false,

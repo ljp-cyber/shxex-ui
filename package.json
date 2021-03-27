@@ -4,22 +4,23 @@
   "description": "后台管理系统",
   "author": "李俊鹏",
   "private": false,
-  "main": "./dist/component-library-gao.common.js",
+  "main": "./dist/shxex-ui.js",
   "files": [
     "dist/*",
-    "src/*",
-    "public/*",
+    "lib/*",
+    "packages/*",
+    "examples/*",
     "*.json",
     "*.js"
   ],
   "scripts": {
+    "lib": "webpack --progress --hide-modules",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "build:lib": "node build/build-lib.js",
-    "build-lib": "vue-cli-service build --target lib --name auto-form ./package/auto-form/index.js",
+    "build-lib": "node build/build-lib.js",
     "build": "node build/build.js"
   },
   "dependencies": {
@@ -29,8 +30,7 @@
     "user": "0.0.0",
     "vue": "^2.6.12",
     "vue-cli": "^2.9.6",
-    "vue-router": "^3.5.1",
-    "yyl-npm-practice": "^1.0.7"
+    "vue-router": "^3.5.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -71,6 +71,7 @@
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "vue": "^2.6.12",
     "vue-jest": "^1.0.2",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",

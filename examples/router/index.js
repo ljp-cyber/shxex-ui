@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-//import HelloWorld from '@/components/HelloWorld'
-import Test from '../views/test'
-import Test1 from '../views/test1'
+import Test from '../views/testVue'
+import Test1 from '../views/testAxios'
 import AutoTableView from '../views/auto-table-view'
 import AutoFormView from '../views/auto-form-view'
-import AutoBGManagement from '../views/auto-bg-management-view'
+import AutoBGManagement from '../views/auto-bg-view'
 
 Vue.use(Router)
 
@@ -13,12 +12,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'testTestView',
+      name: 'testVue-route',
       component: Test
     },
     {
-      path: '/test1',
-      name: 'testTestView1',
+      path: '/testAxios',
+      name: 'testAxios-route',
       component: Test1
     },
     {

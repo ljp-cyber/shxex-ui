@@ -1,15 +1,17 @@
+//执行npm run lib 配置
+//效果和npm run build-lib是一样的
 var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
   entry: './packages/index.js',
   output: {
-    path: path.resolve(__dirname, '../lib'),
-    publicPath: '/lib/',
+    path: path.resolve(__dirname, './lib'),//所有输出文件的目标路径;打包后文件在硬盘中的存储位置。
+    publicPath: '/lib/',//index.html 可访问资源
     filename: 'shxex-ui.js',
-    library: 'shxex-ui', // 指定的就是你使用require时的模块名
-    libraryTarget: 'umd',// 指定输出格式
-    umdNamedDefine: true // 会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define
+    library: 'shxex-ui',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   module: {
     rules: [
@@ -81,7 +83,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/lib/vue.esm.js'
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
@@ -96,23 +98,21 @@ module.exports = {
   devtool: '#eval-source-map'
 }
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
-  ])
-}
+module.exports.devtool = '#source-map'
+// http://vue-loader.vuejs.org/en/workflow/production.html
+module.exports.plugins = (module.exports.plugins || []).concat([
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: '"production"'
+    }
+  }),
+  new webpack.optimize.UglifyJsPlugin({
+    sourceMap: true,
+    compress: {
+      warnings: false
+    }
+  }),
+  new webpack.LoaderOptionsPlugin({
+    minimize: true
+  })
+])

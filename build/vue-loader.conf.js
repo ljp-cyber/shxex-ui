@@ -13,7 +13,7 @@ module.exports = {
   }),
   cssSourceMap: sourceMapEnabled,
   cacheBusting: config.dev.cacheBusting,
-  transformToRequire: {
+  transformToRequire: {//video标签的src属性可以 解析为路径
     video: ['src', 'poster'],
     source: 'src',
     img: 'src',

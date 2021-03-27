@@ -20,6 +20,7 @@
 ## 项目演示
 <img src = "www.shxex.cn:8080/autobg/img/autobglogin.png">
 [http://www.shxex.cn:8080/autobg/](http://www.shxex.cn:8080/autobg/)
+
 ## 组件介绍
 ### auto-form
 该组件依赖element-ui。有几个绑定属性：

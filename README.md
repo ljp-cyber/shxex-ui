@@ -19,7 +19,7 @@
 ```
 ## 项目演示
 
-<img src = "www.shxex.cn:8080/autobg/img/autobglogin.png">
+<img src = "http://www.shxex.cn:8080/autobg/img/autologin.png"/>
 
 [http://www.shxex.cn:8080/autobg/](http://www.shxex.cn:8080/autobg/)
 

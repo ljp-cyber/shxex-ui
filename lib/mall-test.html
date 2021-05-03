@@ -23,12 +23,8 @@
                     getModelsByBG: false,
                     models: {
                         name: '商城后台管理系统',
-                        url: 'http://localhost:8080',
-                        loginUrl: '/login',
-                        loginModel:{
-                            username:'haha',
-                            password:'123456'
-                        },
+                        url: 'http://localhost:8201',
+                        loginUrl: '/mall-auth/oauth/token',
                         childModels: [{
                             name: '用户管理',
                             url: '/usermanage',
@@ -72,7 +68,7 @@
                             }],
                         }, {
                             name: '商品类别',
-                            url: '/tc/shop/goods',
+                            url: '',
                             childModel: [{
                                 name: '商品类别',
                                 url: '/category',
@@ -95,8 +91,8 @@
                                 }
                             }, {
                                 name: '品牌',
-                                url: '/brand',
-                                queryUrl: '/list',
+                                url: '/mall-admin/brand',
+                                queryUrl: '/listAll',
                                 queryMethod: 'GET',
                                 deleteUrl: '/delete',
                                 deleteMethod: 'DELETE',

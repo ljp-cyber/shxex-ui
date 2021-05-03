@@ -20,6 +20,7 @@
         <el-table-column
           :label="item.label"
           :width="item.width"
+          :min-width="150"
           :fixed="item.fixed"
         >
           <template slot="header" slot-scope="scope">
@@ -75,7 +76,7 @@
           :label="item.label"
           :width="item.width"
           :formatter="item.formatter ? item.formatter : null"
-          :show-overflow-tooltip="item.tooltip ? item.tooltip : false"
+          :show-overflow-tooltip="item.tooltip ? item.tooltip : true"
           :sortable="item.sortable ? item.sortable : false"
         ></el-table-column>
       </template>
@@ -103,13 +104,17 @@ export default {
       return this.delete(this.multipleSelection, null);
     },
     defHeader(data) {
-      var head = [];
+      let head = [];
       if (data) {
-        head.push({ type: "selection", fixed: "left" });
-        for (var key in data[0]) {
-          var tooltip = key.length > 10 ? true : false;
-          var type = "text";
-          if (key.indexOf("img") >= 0 || key.indexOf("icon") >= 0) {
+        head.push({ 
+          type: "selection"
+          //fixed: "left"
+        });
+        for (let key in data[0]) {
+          let tooltip = key.length > 10 ? true : false;
+          let type = "text";
+          let key1 = key.toLowerCase();
+          if (key1.indexOf("img") >= 0 || key1.indexOf("icon")>=0 || key1.indexOf("logo") >= 0|| key1.indexOf("pic") >= 0) {
             type = "img";
           }
           head.push({
@@ -123,8 +128,8 @@ export default {
         head.push({
           type: "options",
           prop: "operate",
-          label: "操作",
-          fixed: "right",
+          label: "操作"
+          //fixed: "right"
         });
       }
       return head;
@@ -164,7 +169,7 @@ export default {
         label: "详情",
         event: this.details,
         isShow: (item) => {
-          return item.status == 0 ? false : true;
+          return item.status == 0 ? true : true;
         },
       },
       {
@@ -172,7 +177,7 @@ export default {
         label: "删除",
         event: this.delete,
         isShow: (item) => {
-          return item.status == 1 ? false : true;
+          return item.status == 0 ? true : true;
         },
       },
     ];

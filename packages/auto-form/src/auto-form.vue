@@ -74,6 +74,10 @@ export default {
     };
   },
   props: {
+    pager:{
+      type: Boolean,
+      default: () =>false,
+    },
     disabled: {
       type: Boolean,
       default: () => false,
@@ -146,35 +150,33 @@ export default {
           curoptions = [{ value: "男" }, { value: "女" }];
         } else if (curKey.indexOf("date") >= 0 || curKey.indexOf("day") >= 0) {
           curtype = "date2";
-        } else if(curKey.indexOf("password")>=0){
+        } else if(curKey.indexOf("password")>=0||curKey.indexOf("secret")>=0){
           curtype = "pw";
         }
         res.push({ type: curtype, key: curKey, options: curoptions });
       }
       return res;
     },
+    setForm(){
+      if (this.form == null || this.form.length == 0) {
+        console.log("form is null, use default form");
+        this.curForm = this.defForm();
+      } else {
+        this.curForm = this.form;
+      }
+    }
   },
   mounted() {
-    console.log("mounted");
+    //console.log("mounted");
     if (this.inline == false) {
       this.size = "medium";
     } else {
       this.size = "mini";
     }
-    if (this.form == null || this.form.length == 0) {
-      console.log("form is null, use default form");
-      this.curForm = this.defForm();
-    } else {
-      this.curForm = this.form;
-    }
+    this.setForm();
   },
   beforeUpdate() {
-    if (this.form == null || this.form.length == 0) {
-      console.log("form is null, use default form");
-      this.curForm = this.defForm();
-    } else {
-      this.curForm = this.form;
-    }
-  },
+    this.setForm();
+  }
 };
 </script>

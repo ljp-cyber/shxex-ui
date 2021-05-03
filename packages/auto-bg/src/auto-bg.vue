@@ -39,7 +39,7 @@
 			</el-aside>
 			<el-container>
 				<!-- 头 -->
-		    <el-header>
+		    <el-header  height="auto">
 		    	<auto-form :model="curModel.queryModel" @submit="doQuery" :inline="true">
 		    		<template>
 		    			<el-button @click="insert">添加</el-button>
@@ -60,7 +60,7 @@
 			<auto-form :model="updateData" @submit="doUpdate" :inline="false"></auto-form>
 		</el-dialog>
 		<el-dialog title="登录" :visible.sync="loginFormVisible">
-			<auto-form :model="user" @submit="doLogin" :inline="false"></auto-form>
+			<auto-form :model="models.loginModel" @submit="doLogin" :inline="false"></auto-form>
 		</el-dialog>
 	</div>
 </template>
@@ -70,7 +70,7 @@ export default {
   name: "auto-bg",
   data: () => {
     return {
-      isCollapse: true,
+      isCollapse: false,
       insertFormVisible: false,
       updateFormVisible: false,
       loginFormVisible: false,
@@ -81,8 +81,8 @@ export default {
       insertData: {},
       oldData: {},
       updateData: {},
-      user: { username: null, password: null },
-      token: "",
+      token: null
+      // token:"Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbImFsbCJdLCJpZCI6MywiZXhwIjoxNjIwMDkyMzUzLCJhdXRob3JpdGllcyI6WyI1X-i2hee6p-euoeeQhuWRmCJdLCJqdGkiOiI0ODJkN2VlOC1jYzYxLTRlZDQtOTZjMS0yYWZhNzM1Y2M2OWIiLCJjbGllbnRfaWQiOiJhZG1pbi1hcHAifQ.cVCrEvqQYcYOMZYMrzc3exlLIQV0zc80twfudYEQl9BXRZGyx7q_jUfrBzpfSx_CfMnZ_r6Hd-KykGOFagO6Tf7-xQLwc-VyooPiZ0iqodofGnxjGmQQ2Z3D8jTp1cMSBZYOKNaDqFcUW7kK4o11T5LHc27QxFcgErlDjm8EX8I",
     };
   },
   props: {
@@ -134,40 +134,23 @@ export default {
       console.log(this.baseUrl);
       this.tableData = [];
     },
-    // doAjax(this.curModel.updateUrl,method,data,suc,this.failTips());
-    // this.doAjax1(url,this.baseUrl,method,params,null,suc,fail);
     doAjaxProcess(url, base, method, params, data, suc, fail) {
-      if (params == null) params = data;
-      console.log("请求即将执行，url是：" + base);
-      console.log("请求即将执行，url是：" + url);
+      console.log("请求即将执行，url是：" + base+url);
       console.log("请求参数是：" + params);
       console.log("请求数据是：" + data);
-      let ref = this;
+      console.log("请求token是：" + this.token);
       this.$axios({
         method: method,
         baseURL: base,
         url: url,
         params: params,
-        data: params,
+        data: data,
         headers: {
-          "jwt-token": this.token,
-          // 'Access-Control-Allow-Origin':'*',
-          // 'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept, client_id, uuid, Authorization',
-          // 'Access-Control-Allow-Method':'GET,POST,PUT,DELETE',
-          // 'User-Agent' : 'WEB'
+          'Authorization': this.token
         },
       })
         .then(suc)
         .catch(fail);
-      // .then((response) => {
-      // 	console.log('success')
-      // 	this.responseSuccessHandler(response);
-      // 	suc(response);
-      // })
-      // .catch(function (error) { // 请求失败根据状态码处理
-      // 	ref.writeObj(error.response)
-      // 	console.log('error'+error.response);
-      // });
     },
     doGet(url, method, params, suc, fail) {
       this.doAjaxProcess(url, this.baseUrl, method, params, null, suc, fail);
@@ -175,6 +158,7 @@ export default {
     doPost(url, method, data, suc, fail) {
       this.doAjaxProcess(url, this.baseUrl, method, null, data, suc, fail);
     },
+
     doAjax(url, method, data, suc, fail) {
       if (method == "GET") {
         this.doGet(url, method, data, suc, fail);
@@ -204,8 +188,6 @@ export default {
     failTips() {
       var ref = this;
       function fail(err) {
-        // console.log(err)
-        // ref.writeObj(err);
         let res = err.response;
         ref.$message({
           type: "warning",
@@ -231,88 +213,108 @@ export default {
         });
     },
     doDelete(data) {
-      var that = this;
+      let that = this;
       function suc(response) {
-        console.log("response.data" + response.data);
-        if (response.data == true) {
-          if (Array.isArray(data)) {
-            for (var i = 0; i < data.length; i++) {
-              for (var j = 0; j < that.tableData.length; j++) {
-                if (that.tableData[j] == data[i]) {
-                  that.tableData.splice(j, 1);
-                  break;
-                }
+        let resData = that.responseSuccessHandler(response);
+        if(!resData||resData==0){
+          return;
+        }
+        if (Array.isArray(data)) {
+          for (let i = 0; i < data.length; i++) {
+            for (let j = 0; j < that.tableData.length; j++) {
+              if (that.tableData[j] == data[i]) {
+                that.tableData.splice(j, 1);
+                break;
               }
             }
+          }
+          return;
+        }
+        for (let i = 0; i < that.tableData.length; i++) {
+          if (that.tableData[i] == data) {
+            that.tableData.splice(i, 1);
             return;
           }
-          for (var i = 0; i < that.tableData.length; i++) {
-            if (that.tableData[i] == data) {
-              that.tableData.splice(i, 1);
-              return;
-            }
-          }
         }
       }
-      var ids = [];
-      if (Array.isArray(data)) {
-        for (var item of data) {
-          ids.push(item.id);
-        }
-      } else {
-        ids.push(data.id);
-      }
-      // function fail(){
-      // 	console.log('fail');
-      // 	suc({data:true});
-      // }
-      var method = this.curModel.deleteMethod
+      
+      let method = this.curModel.deleteMethod
         ? this.curModel.deleteMethod
         : "POST";
-      this.doTips("删除不可恢复，确定删除吗？", () => {
-        this.doAjax(this.curModel.deleteUrl, method, ids, suc, this.failTips());
-      });
+      let url = this.curModel.deleteUrl;
+      console.log(data);
+      if (Array.isArray(data)) {
+        let ids = [];
+        for (let item of data) {
+          ids.push(item.id);
+        }
+        this.doTips("删除不可恢复，确定删除吗？", () => {
+          this.doAjax(this.curModel.deleteUrl, method, ids, suc, this.failTips());
+        });
+      } else {
+        if(this.curModel.deleteUrlAppend){
+          url= url + '/' + data.id;
+        }
+        this.doTips("删除不可恢复，确定删除吗？", () => {
+          this.doAjax(url, method, null, suc, this.failTips());
+        });
+      }
     },
     doQuery(data) {
       var that = this;
       function suc(response) {
-        console.log("success");
-        console.log(response.data);
-        if (Array.isArray(response.data)) that.tableData = response.data;
+        let resData = that.responseSuccessHandler(response);
+        if(!resData){
+          return;
+        }
+        if (Array.isArray(resData)) {
+          that.tableData = resData;
+          return;
+        }
+        if (Array.isArray(resData.list)) {
+          that.tableData = resData.list;
+          return;
+        }
+        that.getTips('warning','结果不是列表，将此对象加入一个列表显示')();
+        let res = []
+        res.push(resData);
+        that.tableData = res;
       }
-      // function fail(){
-      // 	console.log('fail');
-      // 	that.tableData=that.testData();
-      // }
       console.log(this.curModel.queryUrl);
       var method = this.curModel.queryMethod
         ? this.curModel.queryMethod
         : "POST";
-      this.doAjax(this.curModel.queryUrl, method, data, suc, this.failTips());
+      let url = this.curModel.queryUrl;
+      if(this.curModel.queryUrlAppend){
+        url = url + '/' + data[this.curModel.queryUrlAppend];
+      }
+      this.doAjax(url, method, data, suc, this.failTips());
     },
     doUpdate(data) {
       this.updateFormVisible = false;
       var that = this;
       function suc(response) {
-        console.log(response.data);
-        if (response.data == true) {
-          for (var i = 0; i < that.tableData.length; i++) {
-            if (that.tableData[i] == that.oldDate) {
-              that.$set(that.tableData, i, that.updateData);
-              that.tableData[i] = that.updateData;
-              return;
-            }
+        let resData = that.responseSuccessHandler(response);
+        if(!resData||resData==0){
+          return;
+        }
+        for (let i = 0; i < that.tableData.length; i++) {
+          if (that.tableData[i] == that.oldDate) {
+            that.$set(that.tableData, i, that.updateData);
+            that.tableData[i] = that.updateData;
+            return;
           }
         }
+        
       }
-      // function fail(){
-      // 	console.log('fail');
-      // 	suc({data:true});
-      // }
-      var method = this.curModel.updateMethod
+      let method = this.curModel.updateMethod
         ? this.curModel.updateMethod
         : "POST";
-      this.doAjax(this.curModel.updateUrl, method, data, suc, this.failTips());
+      let url = this.curModel.updateUrl;
+      if(this.curModel.updateUrlAppend){
+        url= url + '/' + data.id;
+      }
+      this.doAjax(url, method, data, suc, this.failTips());
     },
     update(data) {
       this.oldDate = data;
@@ -322,21 +324,19 @@ export default {
     doInsert(data) {
       this.insertFormVisible = false;
       if (data.birthday) data.birthday = data.birthday[0];
-      var that = this;
+      let that = this;
       function suc(response) {
-        console.log(response.data);
-        if (response.data == true) {
-          that.tableData.push(data);
+        let resData = that.responseSuccessHandler(response);
+        if(!resData){
+          return;
         }
+        that.tableData.push(data);
       }
-      // function fail(){
-      // 	console.log('fail');
-      // 	suc({data:true});
-      // }
-      var method = this.curModel.insertMethod
+      let method = this.curModel.insertMethod
         ? this.curModel.insertMethod
         : "POST";
-      this.doAjax(this.curModel.insertUrl, method, data, suc, this.failTips());
+      let url = this.curModel.insertUrl;
+      this.doAjax(url, method, data, suc, this.failTips());
     },
     insert() {
       if (!this.curModel.insertModel) {
@@ -356,66 +356,115 @@ export default {
       this.insertFormVisible = true;
     },
     doLogin() {
-      var that = this;
+      let that = this;
       function suc(response) {
-        console.log(response.data);
-        that.token = response.data;
-        var temp = that.getTips("warning", "登录成功");
-        temp();
-        that.user.username = null;
-        that.user.password = null;
+        let resData = that.responseSuccessHandler(response);
+        if(!resData){
+          return;
+        }
+        let token = resData;
+        if(typeof(resData) == 'object'){
+          token = resData.token;
+        }
+        if(typeof(token) == 'string' && !token.startsWith('Bearer ')){
+          that.token = 'Bearer ' + token;
+        }
+        that.setCookie('Authorization',that.token);
+        that.getTips("warning", "登录成功")();
+        for (let key in that.models.loginModel) {
+          that.models.loginModel[key] = null;
+        }
         that.loginFormVisible = false;
       }
-      var method = this.models.loginMethod ? this.models.loginMethod : "POST";
-      console.log(
-        this.user.username + "," + this.user.password + "," + this.models.url
+      let method = this.models.loginMethod ? this.models.loginMethod : "POST";
+      this.doAjaxProcess(
+        this.models.loginUrl,
+        this.models.url,
+        method,
+        that.models.loginModel,
+        that.models.loginModel,
+        suc,
+        this.failTips()
       );
-
-      if (method == "GET") {
-        this.doAjaxProcess(
-          this.models.loginUrl,
-          this.models.url,
-          method,
-          this.user,
-          null,
-          suc,
-          this.failTips()
-        );
-      } else {
-        this.doAjaxProcess(
-          this.models.loginUrl,
-          this.models.url,
-          method,
-          null,
-          this.user,
-          suc,
-          this.failTips()
-        );
-      }
     },
     responseSuccessHandler(response) {
-      console.log(
-        "回应处理方法responseSuccessHandler(response)：数据是：" + response.data
-      );
-      if (response.data == "false" || response.data == false) {
+      console.log(response);
+      let code = this.defExtractCodeFor(response);
+      if(code == 200){
+        return this.defExtractDataFor(response);
+      }
+      if(code == 401) {
         this.loginFormVisible = true;
       }
+      return undefined;
     },
     responseFailHandler(response) {
-      if (response == undefined) {
-        console.log(
-          "回应处理方法responseFalseHandler(response)：数据是：undefined"
-        );
-        return;
-      }
-      console.log(
-        "回应处理方法responseFalseHandler(response)：数据是：" + response.status
-      );
-      if (response.status == 401) {
+      console.log(response);
+      let code = this.defExtractCodeFor(response);
+      if(code == 401) {
         this.loginFormVisible = true;
       }
     },
+    defExtractDataFor: (response) => {
+      if (response == undefined || response.data == undefined) {
+        return undefined;
+      }
+      if (response.data.data == undefined) {
+        return response.data;
+      }
+      return response.data.data;
+    },
+    defExtractMesFor: (response) => {
+      if (
+        response == undefined ||
+        (response.message == undefined &&
+        response.data == undefined)
+      ) {
+        return undefined;
+      }
+      if (response.data != undefined && response.data.message != undefined) {
+        return response.data.message;
+      }
+      return response.message;
+    },
+    defExtractCodeFor: (response) => {
+      if (response == undefined || response.status == undefined) {
+        return -1;
+      }
+      if (response.status != 200) {
+        return response.status;
+      } else if (
+        response.data != undefined &&
+        response.data.code != undefined
+      ) {
+        return response.data.code;
+      }
+      return response.status;
+    },
+    setCookie(name, value) {  
+      var Days = 60; //cookie 将被保存两个月   
+      var exp = new Date(); //获得当前时间   
+      exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000); //换成毫秒  
+      document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();  
+    },
+    getCookie(name) {  
+      //取出cookie   
+      var strCookie = document.cookie;  
+      //cookie的保存格式是 分号加空格 "; "  
+      var arrCookie = strCookie.split("; ");  
+      for ( var i = 0; i < arrCookie.length; i++) {  
+          var arr = arrCookie[i].split("=");  
+          if (arr[0] == name) {  
+              return arr[1];  
+          }  
+      }  
+      return "";  
+  }  
   },
+  mounted(){
+    console.log("mounted");
+    this.token = decodeURIComponent(this.getCookie('Authorization'));
+  }
 };
 </script>
 

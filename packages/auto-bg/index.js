@@ -1,10 +1,10 @@
-
+// import Vue from 'vue'
 import Axios from 'axios'
 import AutoTable from '../auto-table/index'
 import AutoForm from '../auto-form/index'
 import AutoBGManagement from './src/auto-bg.vue'
 
-init(window.VUe);
+init(Vue);
 
 function init(Vue){
   if(Vue){
@@ -20,8 +20,8 @@ if (typeof window !== 'undefined' && window.Vue) {
   init(window.Vue);
 }
 
-AutoBGManagement.install = function (Vue) {
-  init(Vue);
+AutoBGManagement.install = function (vue) {
+  init(vue);
 }
 
 export default AutoBGManagement

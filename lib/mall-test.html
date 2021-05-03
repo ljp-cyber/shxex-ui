@@ -18,98 +18,390 @@
     <script type="text/javascript">
         var vue = new Vue({
             el: '#app1',
-            data() {
-                return {
-                    getModelsByBG: false,
-                    models: {
-                        name: '商城后台管理系统',
-                        url: 'http://localhost:8201',
-                        loginUrl: '/mall-auth/oauth/token',
-                        childModels: [{
-                            name: '用户管理',
-                            url: '/usermanage',
-                            childModel: [{
-                                name: '用户信息',
-                                url: '/user',
-                                queryUrl: '/query',
-                                queryMethod: 'POST',
-                                deleteUrl: '/delete',
-                                deleteMethod: 'DELETE',
-                                insertUrl: '/register',
-                                insertMethod: 'PUT',
-                                updateUrl: '/update',
-                                updateMethod: 'POST',
-                                queryModel: {
-                                    key: null,
-                                    beginAge: null,
-                                    endAge: null,
-                                    role: null
-                                },
-                                insertModel: {
-                                    id: null,
-                                    name: null,
-                                    nick_name: null,
-                                    icon: null,
-                                    birthday: null,
-                                    password: null,
-                                    sex: null,
-                                    phone: null,
-                                    email: null,
-                                    role: null
-                                }
-                            }, {
-                                name: '安全信息',
-                                url: '/userSafe',
-                                queryUrl: '/list',
-                                queryMethod: 'GET',
-                                deleteUrl: '/delete',
-                                insertUrl: '/insert',
-                                updateUrl: '/update'
-                            }],
-                        }, {
-                            name: '商品类别',
-                            url: '',
-                            childModel: [{
-                                name: '商品类别',
-                                url: '/category',
-                                queryUrl: '/list',
-                                queryMethod: 'POST',
-                                deleteUrl: '/delete',
-                                deleteMethod: 'DELETE',
-                                insertUrl: '/insert',
-                                insertMethod: 'PUT',
-                                updateUrl: '/update',
-                                updateMethod: 'POST',
-                                queryModel: {
-                                    page: ''
-                                },
-                                insertModel: {
-                                    id: null,
-                                    name: null,
-                                    icon: null,
-                                    represent: null
-                                }
-                            }, {
-                                name: '品牌',
-                                url: '/mall-admin/brand',
-                                queryUrl: '/listAll',
-                                queryMethod: 'GET',
-                                deleteUrl: '/delete',
-                                deleteMethod: 'DELETE',
-                                insertUrl: '/insert',
-                                insertMethod: 'PUT',
-                                updateUrl: '/update',
-                                updateMethod: 'POST'
-                            }],
-                        }],
-                    }
-                }
-            },
-            methods: {
-                beforeMouths() {
+            data:()=>{
+			return {
+				getModelsByBG:false,
+				models:{
+					name:'商城后台管理系统',
+					url:'http://admin-api.macrozheng.com',
+					loginUrl:'/admin/login',
+					loginModel:{
+						username:'admin',
+						password:'macro123',
+						// grant_type:'password',
+						// client_id:'admin-app',
+						// client_secret:'123456'
+					},
+					childModels:[{
+						name:'用户管理',
+						url:'',
+						childModel:[{
+							name:'管理员',
+							url:'/admin',
+							queryUrl:'/list',
+							queryMethod:'GET',
+							deleteUrl:'/delete',
+							deleteUrlAppend:true,
+							deleteMethod:'POST',
+							insertUrl:'/register',
+							insertMethod:'POST',
+							updateUrl:'/update',
+							updateUrlAppend:true,
+							updateMethod:'POST',
+							queryModel:{
+								keyword:null,
+								pageSize:null,
+								pageNum:null
+							},
+							insertModel:{
+								username:null,
+								password:null,
+								icon:null,
+								email:null,
+								nickName:null,
+								note:null
+							}
+						},{
+							name:'会员等级',
+							url:'/memberLevel',
+							queryUrl:'/list',
+							queryMethod:'GET',
+							queryModel:{
+								defaultStatus:''
+							}
+						},{
+							name:'后台菜单管理',
+							url:'/menu',
+							queryUrl:'/treeList',
+							queryMethod:'GET',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							updateUrl:'/update',
+							updateMethod:'POSt',
+							updateUrlAppend:true,
+							deleteUrl:'/delete',
+							deleteUrlAppend:true,
+							deleteMethod:'POST',
+						},{
+							name:'资源分类管理',
+							url:'/resourceCategory',
+							queryUrl:'/listAll',
+							queryMethod:'GET',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							updateUrl:'/update',
+							updateMethod:'POSt',
+							updateUrlAppend:true,
+							deleteUrl:'/delete',
+							deleteUrlAppend:true,
+							deleteMethod:'POST',
+						},{
+							name:'后台资源管理',
+							url:'/resource',
+							queryUrl:'/listAll',
+							queryMethod:'GET',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							updateUrl:'/update',
+							updateMethod:'POSt',
+							updateUrlAppend:true,
+							deleteUrl:'/delete',
+							deleteUrlAppend:true,
+							deleteMethod:'POST'
+						},{
+							name:'后台用户角色管理',
+							url:'/role',
+							queryUrl:'/listAll',
+							queryMethod:'GET',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							updateUrl:'/update',
+							updateMethod:'POSt',
+							updateUrlAppend:true,
+							deleteUrl:'/delete',
+							deleteUrlAppend:true,
+							deleteMethod:'POST'
+						}],
+					},{
+						name:'商品管理',
+						url:'',
+						childModel:[{
+							name:'商品属性类别',
+							url:'/productAttribute/category',
+							queryUrl:'/list',
+							queryMethod:'GET',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							deleteUrlAppend:true,
+							updateUrl:'/update',
+							updateMethod:'POST',
+							updateUrlAppend:true
+						},{
+							name:'商品属性',
+							url:'/productAttribute',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							deleteUrlAppend:true,
+							updateUrl:'/update',
+							updateMethod:'POST',
+							updateUrlAppend:true,
+							queryUrl:'/list',
+							queryMethod:'GET',
+							queryUrlAppend:'id',
+							queryModel:{
+								id:null,
+								type:0,
+								pageSize:5,
+								pageNum:1
+							}
+						},{
+							name:'商品分类',
+							url:'/productCategory',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							deleteUrlAppend:true,
+							updateUrl:'/update',
+							updateMethod:'POST',
+							updateUrlAppend:true,
+							queryUrl:'/list',
+							queryMethod:'GET',
+							queryUrlAppend:'parentId',
+							queryModel:{
+								parentId:null,
+								pageSize:5,
+								pageNum:1
+							}
 
-                }
-            }
+						},{
+							name:'商品管理',
+							url:'/product',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							deleteUrlAppend:true,
+							updateUrl:'/update',
+							updateMethod:'POST',
+							updateUrlAppend:true,
+							queryUrl:'/list',
+							queryMethod:'GET',
+							queryModel:{
+								pageSize:5,
+								pageNum:1
+							}
+						},{
+							name:'库存管理',
+							url:'/sku',
+							queryUrl:'',
+							queryMethod:'GET',
+							queryUrlAppend:'pid',
+							queryModel:{
+								pid:null,
+								keyword:null
+							}
+						},{
+							name:'品牌',
+							url:'/brand',
+							queryUrl:'/listAll',
+							queryMethod:'GET',
+							deleteUrl:'/delete',
+							deleteMethod:'DELETE',
+							insertUrl:'/insert',
+							insertMethod:'PUT',
+							updateUrl:'/update',
+							updateMethod:'POST'
+						}],
+					},{
+						name:'营销管理',
+						url:'',
+						childModel:[{
+							name:'首页轮播管理',
+							url:'/home/advertise',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							deleteUrlAppend:true,
+							updateUrl:'/update',
+							updateMethod:'POST',
+							updateUrlAppend:true,
+							queryUrl:'/list',
+							queryMethod:'GET',
+							queryModel:{
+								name:null,
+								type:null,
+								endTime:null,
+								pageSize:5,
+								pageNum:1
+							}
+						},{
+							name:'首页品牌管理',
+							url:'/home/brand',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							deleteUrlAppend:true,
+							updateUrl:'/update',
+							updateMethod:'POST',
+							updateUrlAppend:true,
+							queryUrl:'/list',
+							queryMethod:'GET',
+							queryModel:{
+								brandName:null,
+								recommendStatus:null,
+								pageSize:5,
+								pageNum:1
+							}
+						},{
+							name:'首页上新管理',
+							url:'/home/newProduct',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							deleteUrlAppend:true,
+							updateUrl:'/update',
+							updateMethod:'POST',
+							updateUrlAppend:true,
+							queryUrl:'/list',
+							queryMethod:'GET',
+							queryModel:{
+								brandName:null,
+								recommendStatus:null,
+								pageSize:5,
+								pageNum:1
+							}
+						},{
+							name:'首页人气推荐管理',
+							url:'/home/recommendProduct',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							deleteUrlAppend:true,
+							updateUrl:'/update',
+							updateMethod:'POST',
+							updateUrlAppend:true,
+							queryUrl:'/list',
+							queryMethod:'GET',
+							queryModel:{
+								brandName:null,
+								recommendStatus:null,
+								pageSize:5,
+								pageNum:1
+							}
+						},{
+							name:'首页专题推荐管理',
+							url:'/home/recommendSubject',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							deleteUrlAppend:true,
+							updateUrl:'/update',
+							updateMethod:'POST',
+							updateUrlAppend:true,
+							queryUrl:'/list',
+							queryMethod:'GET',
+							queryModel:{
+								subjectName:null,
+								recommendStatus:null,
+								pageSize:5,
+								pageNum:1
+							}
+						}]
+					},{
+						name:'订单管理',
+						url:'',
+						childModel:[{
+							name:'订单管理',
+							url:'/order',
+							queryUrl:'/list',
+							queryMethod:'GET',
+							queryModel:{
+								orderSn:null,
+								receiverKeyword:null,
+								status:null,
+								orderType:null,
+								sourceType:null,
+								createTime:null,
+								pageSize:5,
+								pageNum:1
+							}
+						},{
+							name:'订单退货管理',
+							url:'/returnApply',
+							queryUrl:'/list',
+							queryMethod:'GET',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							queryModel:{
+								id:null,
+								receiverKeyword:null,
+								status:null,
+								createTime:null,
+								handleMan:null,
+								handleTime:null
+							}
+						},{
+							name:'退货原因',
+							url:'/returnReason',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							deleteUrlAppend:true,
+							updateUrl:'/update',
+							updateMethod:'POST',
+							updateUrlAppend:true,
+							queryUrl:'/list',
+							queryMethod:'GET',
+							queryModel:{
+								pageSize:5,
+								pageNum:1
+							}
+						},{
+							name:'退货设置',
+							url:'/orderSetting',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							deleteUrlAppend:true,
+							updateUrl:'/update',
+							updateMethod:'POST',
+							updateUrlAppend:true,
+							queryUrl:'',
+							queryMethod:'GET',
+							queryUrlAppend:'id',
+							queryModel:{
+								id:null
+							}
+						},{
+							name:'收货地址',
+							url:'/companyAddress',
+							insertUrl:'/create',
+							insertMethod:'POST',
+							deleteUrl:'/delete',
+							deleteMethod:'POST',
+							deleteUrlAppend:true,
+							updateUrl:'/update',
+							updateMethod:'POST',
+							updateUrlAppend:true,
+							queryUrl:'list',
+							queryMethod:'GET'
+						}]
+					}],
+				}
+			}
+		}
         })
     </script>
 </body>

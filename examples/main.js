@@ -9,27 +9,19 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
-//测试Vue页面
-import Test from '../packages/testVue/index'
-Vue.use(Test)
-
-import Axios from 'axios'
-Vue.prototype.$axios = Axios
-//Vue.use(Axios)
+import packages from '../packages/index'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+// import Axios from 'axios'
+// Vue.prototype.$axios = Axios
 Vue.use(ElementUI)
 
-import AutoTable from '../packages/auto-table/index'
-Vue.use(AutoTable)
-
-import AutoForm from '../packages/auto-form/index'
-Vue.use(AutoForm)
-
-import AutoBG from '../packages/auto-bg/index'
-Vue.use(AutoBG)
+Vue.use(router)
+for (let key in packages) {
+  console.log(key)
+  Vue.use(packages[key]);
+}
 
 Vue.config.productionTip = false
 

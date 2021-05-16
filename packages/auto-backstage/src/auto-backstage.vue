@@ -11,25 +11,25 @@
 				</el-switch>
 				<el-menu :collapse="!isCollapse" :default-active="curAct" @select="select">
 					<template v-for="(item,index) in models.childModels">
-						<el-submenu :index="index+''">
+						<el-submenu :index="index+''" :key="item+''+index">
 			        <template slot="title">
 			        	<i class="el-icon-menu"></i>
 			        	<span slot="title">{{item.name}}</span>
 			        </template>
 		        	<template v-for="(item1,index1) in item.childModel">
-		          	<el-menu-item :index="index+'-'+index1">{{item1.name}}</el-menu-item>
+		          	<el-menu-item :key="item1+''+index1" :index="index+'-'+index1">{{item1.name}}</el-menu-item>
 		          </template>
 			        <template v-for="(item1,index1) in item.childModels">
-				        <el-menu-item-group v-if="item.childModels.isGroup">
+				        <el-menu-item-group v-if="item.childModels.isGroup" :key="item1+''+index1">
 				          <template slot="title">{{item1.name}}</template>
 				          <template v-for="(item2,index2) in item1.childModel">
-				          	<el-menu-item :index="index+'-'+index1+'-'+index2">{{item2.name}}</el-menu-item>
+				          	<el-menu-item :index="index+'-'+index1+'-'+index2" :key="item2+''+index2">{{item2.name}}</el-menu-item>
 				          </template>
-				        </el-menu-item-group v-else>
-		          	<el-submenu :index="index+'-'+index1">
+				        </el-menu-item-group>
+		          	<el-submenu  v-else :index="index+'-'+index1" :key="item1+''+index1">
 		          		<template slot="title">{{item1.name}}</template>
 		          		<template v-for="(item2,index1) in item1.childModel">
-				          	<el-menu-item :index="index+'-'+index1+'-'+index2">{{item2.name}}</el-menu-item>
+				          	<el-menu-item :index="index+'-'+index1+'-'+index2" :key="item2+''+index2">{{item2.name}}</el-menu-item>
 				          </template>
 		          	</el-submenu>
 			        </template>
@@ -67,7 +67,7 @@
 
 <script>
 export default {
-  name: "auto-bg",
+  name: "auto-backstage",
   data: () => {
     return {
       isCollapse: false,

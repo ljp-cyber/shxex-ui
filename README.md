@@ -1,6 +1,10 @@
-# shxex-ui-autoBackgroundManagement
+# shxex-ui
 
-> 该项目为自适应后台管理系统，目地是简化开发过程中对数据库增删改查测试流程，只需绑定后台增删改查接口即可实现增删改查测试。该项目以vue为前端框架，二次封装elmentui，实现了autoTable、autoFor月、autoBackground组件。该项目为自适应后台管理系统，目地是简化开发过程中对数据库增删改查测试流程，只需绑定后台增删改查接口即可实现增删改查测试。21年5月支持标准的jwt登录，适配火爆开源mall的大部分接口。
+> 21年3月：该项目为自适应后台管理系统，目地是简化开发过程中对数据库增删改查测试流程，只需绑定后台增删改查接口即可实现增删改查测试。该项目以vue为前端框架，二次封装elment-ui，实现了auto-table、auto-form、auto-backstage组件。该项目为自适应后台管理系统，目地是简化开发过程中对数据库增删改查测试流程，只需绑定后台增删改查接口即可实现增删改查测试。
+
+> 21年4月：auto-backstage支持标准的jwt登录，完善单组件打包为js，支持配置路径参数，适配火爆开源mall的部分接口。
+
+> 21年5月：新组件auto-carousel、auto-card-list、auto-card-home（开发中）。该系类组件为卡片式个人主页。另外packages和examples文件夹index.js自动扫描所有组件和组件参数view并导出，消除了单组件配置每次开发都要更新index.js的缺陷。
 
 ## 目录结构
 
@@ -8,6 +12,7 @@
 ├── build --项目构建(webpack)相关代码
 ├── config  --配置目录，包括端口号等
 ├── node_modules    --npm 加载的项目依赖模块
+├── dist --examples输出文件
 ├── lib --把组件打包成js后的文件存放目录
 ├── examples    --用于展示组件的demo，把程序主入口配置在这里了
 ├── packages    --组件代码
@@ -49,6 +54,18 @@ form（配置显示类型，支持日期、文本性别选择、密码，默认�
 - childModel:name,url和增删改查对应的url,method(get pos ...)和参数
 另外该组件支持jwt登录，权限不够时java后台返回401状态码，自动进入登录画面。
 输入账号密码点击提交就会访问loginUrl，java后端需要返回token，下次访问即携带token访问
+
+### auto-carousel
+
+该组件依赖element-ui的carousel（走马灯）组件。自动对绑定数据进行分类（图片、音频、url、日期、长文本、文本、标题）。组件布局分为三个部分：上标题，中图片音频长文本、下日期、rul、短文本。
+
+### auto-card-list
+
+该组件依赖auto-carousel和element-ui的card（卡片）布局。组件布局由若干个auto-carousel组成，背景为蓝色。对传入的数据分解到auto-carousel里。
+
+### auto-card-home
+
+该组件依赖auto-card-list、el-menu、el容器、axios。该组绑定后端接口，用于获取数据进行展示。
 
 ## Build Setup
 

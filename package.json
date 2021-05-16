@@ -1,6 +1,6 @@
 {
   "name": "@shxex/autobg",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "后台管理系统",
   "author": "李俊鹏",
   "private": false,
@@ -21,7 +21,8 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "build-lib": "node build/build-lib.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -51,6 +52,8 @@
     "copy-webpack-plugin": "^4.0.1",
     "cross-spawn": "^5.0.1",
     "css-loader": "^0.28.0",
+    "eslint": "^7.26.0",
+    "eslint-plugin-vue": "^7.9.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",

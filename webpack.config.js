@@ -10,8 +10,8 @@ module.exports = {
     publicPath: '/lib/',//index.html 可访问资源
     filename: 'shxex-ui.js',
     library: 'shxex-ui',
-    libraryTarget: 'commonjs2',
-    // libraryTarget: 'umd',
+    // libraryTarget: 'commonjs2',
+    libraryTarget: 'umd',//要想在html中引用，要使用umd，umd是commonjs2和amd的组合
     umdNamedDefine: true
   },
   module: {

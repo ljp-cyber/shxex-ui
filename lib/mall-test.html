@@ -3,7 +3,10 @@
 
 <head>
     <meta charset=utf-8>
-    <meta name=viewport content="width=device-width,initial-scale=1">
+    <meta name=viewport content="width=device-width,initial-scale=1"><link rel="stylesheet" type="text/css" href="css/element-index.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
     <title>first</title>
 </head>
 
@@ -11,11 +14,9 @@
     <div id="app1">
         <auto-backstage :models="models"></auto-backstage>
     </div>
-    <link rel="stylesheet" type="text/css" href="css/element-index.css" />
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="js/element-index.js"></script>
-    <script src="shxex-ui.js"></script>
-    <script type="text/javascript">
+    <script src="js/element-index.js"></script>    
+	<script src="./shxex-ui.js"></script>
+	<script type="text/javascript">
         var vue = new Vue({
             el: '#app1',
             data:()=>{
@@ -404,6 +405,7 @@
 		}
         })
     </script>
+    
 </body>
 
 </html>

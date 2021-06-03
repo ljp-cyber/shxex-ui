@@ -10,7 +10,8 @@ module.exports = {
     publicPath: '/lib/',//index.html 可访问资源
     filename: 'shxex-ui.js',
     library: 'shxex-ui',
-    libraryTarget: 'umd',
+    libraryTarget: 'commonjs2',
+    // libraryTarget: 'umd',
     umdNamedDefine: true
   },
   module: {

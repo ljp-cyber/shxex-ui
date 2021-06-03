@@ -1,6 +1,7 @@
 import autoSimplePage from './src/auto-simple-page'
 
 function init(Vue) {
+    console.log("install autoSimplePage")
     if (Vue) {
         Vue.component(autoSimplePage.name, autoSimplePage)
     }

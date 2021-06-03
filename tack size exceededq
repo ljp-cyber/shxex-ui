@@ -1,0 +1,133 @@
+[33mcommit afea3bc10d8a723d0580486f7d336180e512c734[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31mautobg/master[m[33m)[m
+Author: ljp <460222822@qq.com>
+Date:   Sun May 16 23:05:56 2021 +0800
+
+    批量导出导入、卡片式主页系类组件
+
+[33mcommit bf2a374e28fd8d0292bb3f90ff79f37de8c29523[m
+Author: ljp <460222822@qq.com>
+Date:   Tue May 4 00:46:59 2021 +0800
+
+    mall-test 适配线上mall
+
+[33mcommit 722ef5e08e8e27a8463aec088d6dc2596681b699[m
+Author: ljp <460222822@qq.com>
+Date:   Tue May 4 00:18:48 2021 +0800
+
+    更新md
+
+[33mcommit 8e6230b88f17b4bb87d2c4189fcf78d7c68ac164[m
+Merge: 112722f 409beb4
+Author: ljp <460222822@qq.com>
+Date:   Tue May 4 00:15:47 2021 +0800
+
+    Merge branch 'master' of github.com:ljp-cyber/shxex-ui
+
+[33mcommit 112722f88c759159902205bdfa1cd7353fb1288c[m
+Author: ljp <460222822@qq.com>
+Date:   Tue May 4 00:13:04 2021 +0800
+
+    标准jwt，去除锁定，增加识别，长串隐藏，form高度自适应，适配通用respond，登录模型，路径参数，适配mall
+
+[33mcommit 409beb41f227fe99aa25305326f1c8bc072755de[m
+Author: ljp-cyber <56222696+ljp-cyber@users.noreply.github.com>
+Date:   Sat Mar 27 19:59:27 2021 +0800
+
+    Update README.md
+
+[33mcommit 19ee9d7bf821c623b218aebf86a0a51f73432069[m
+Author: ljp-cyber <56222696+ljp-cyber@users.noreply.github.com>
+Date:   Sat Mar 27 19:19:24 2021 +0800
+
+    Update README.md
+
+[33mcommit e84564c1f48e45967a6271862ad8d286a65eab7b[m
+Author: ljp-cyber <56222696+ljp-cyber@users.noreply.github.com>
+Date:   Sat Mar 27 19:18:22 2021 +0800
+
+    Update README.md
+
+[33mcommit 77f618fda567658e53288cb1e4cdca85ac356667[m
+Author: ljp-cyber <56222696+ljp-cyber@users.noreply.github.com>
+Date:   Sat Mar 27 19:11:27 2021 +0800
+
+    Update README.md
+
+[33mcommit fc94af5720b6ce69afefab58421c0fcd89174c96[m
+Author: ljp-cyber <56222696+ljp-cyber@users.noreply.github.com>
+Date:   Sat Mar 27 19:10:12 2021 +0800
+
+    Update README.md
+
+[33mcommit 1ca931a79c1be2148b3d58e3e0fa94b6ffbf9db1[m
+Author: ljp <460222822@qq.com>
+Date:   Sat Mar 27 19:03:02 2021 +0800
+
+    修bug
+
+[33mcommit 1f2e041de5c3550a97f4e64366060836684fb192[m
+Merge: fe7e211 a81eb1f
+Author: ljp <460222822@qq.com>
+Date:   Sat Mar 27 17:48:31 2021 +0800
+
+    Merge branch 'master' of github.com:ljp-cyber/shxex-ui
+
+[33mcommit fe7e21130e72cfbd3931b6a314c80fee6432c6c7[m
+Author: ljp <460222822@qq.com>
+Date:   Sat Mar 27 15:50:31 2021 +0800
+
+    更新lib和readme
+
+[33mcommit a81eb1f0c2e378928a3436305577787d65f315bf[m
+Author: ljp <460222822@qq.com>
+Date:   Sat Mar 27 15:50:31 2021 +0800
+
+    更新readme
+
+[33mcommit b70b8cc9a472d357d46233d0dd1cdc90341d5edb[m
+Author: ljp <460222822@qq.com>
+Date:   Sat Mar 27 14:20:08 2021 +0800
+
+    完善组件构建为js配置，理清构建流程
+
+[33mcommit 5f6736a2022d50392d6ce0aab1889a5ddfc562fc[m
+Author: ljp-cyber <56222696+ljp-cyber@users.noreply.github.com>
+Date:   Mon Mar 22 22:01:26 2021 +0800
+
+    Update README.md
+
+[33mcommit 85f443ef3feebb14b48fe167fc952f6b8b121fe4[m
+Author: ljp <460222822@qq.com>
+Date:   Mon Mar 22 21:59:14 2021 +0800
+
+    修复axious的调用流程
+
+[33mcommit a46c27f36463e69b2442e50dcb51d839b6f3adf8[m
+Author: ljp <460222822@qq.com>
+Date:   Mon Mar 1 00:06:52 2021 +0800
+
+    添加组件构建模式
+
+[33mcommit e2e7c5afe24c4c4a8b0a11ddb89ca1ce5fd6a706[m
+Author: ljp-cyber <56222696+ljp-cyber@users.noreply.github.com>
+Date:   Sun Feb 28 12:32:35 2021 +0800
+
+    Update .gitattributes
+
+[33mcommit c9618e316a0393193a397bda1cf18331eadb9d27[m
+Author: ljp-cyber <56222696+ljp-cyber@users.noreply.github.com>
+Date:   Sun Feb 28 12:31:34 2021 +0800
+
+    Create .gitattributes
+
+[33mcommit 7e2b14a14c8b265e65a4bc29258f8bde659f3526[m
+Author: ljp-cyber <56222696+ljp-cyber@users.noreply.github.com>
+Date:   Sun Feb 28 11:33:58 2021 +0800
+
+    Update README.md
+
+[33mcommit 70b29eaf24ff5644694df080b396473aef0ff8c5[m
+Author: ljp <460222822@qq.com>
+Date:   Wed Feb 24 01:13:29 2021 +0800
+
+    commit in 20210224

@@ -1,10 +1,10 @@
 <template>
-	<auto-bg :models="models"></auto-bg>
+	<auto-backstage :models="models"></auto-backstage>
 </template>
 
 <script>
 	export default{
-		name:'auto-bg-view',
+		name:'auto-backstage-view',
 		data:()=>{
 			return {
 				getModelsByBG:false,

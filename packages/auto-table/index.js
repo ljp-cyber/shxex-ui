@@ -6,6 +6,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 // 为组件提供 install 安装方法，供按需引入
 AutoTable.install = function (Vue) {
+  console.log("install AutoTable")
   Vue.component(AutoTable.name, AutoTable)
 }
 

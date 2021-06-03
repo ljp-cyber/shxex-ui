@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <title>主页后台管理系统</title>
+</head>
+
+<body>
+    <link rel="stylesheet" type="text/css" href="css/element-index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./js/element-index.js"></script>
+    <script src="./shxex-ui.js"></script>
+    <div id="app1">
+        <el-button>asdf </el-button>
+        <auto-backstage :models="models"></auto-backstage>
+    </div>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: '#app1',
+            data() {
+                return {
+                    getModelsByBG: false,
+                    models: {
+                        name: '主页后台管理系统',
+                        url: 'http://localhost:8080/myweb',
+                        loginUrl: '/login',
+                        loginModel: {
+                            username: '',
+                            password: ''
+                        },
+                        childModels: [{
+                            name: "后台管理",
+                            url: '/bm',
+                            childModel: [{
+                                name: "爱好管理",
+                                url: "/hobby",
+                                queryUrl: '/list',
+                                queryMethod: 'GET',
+                                deleteUrl: '/deleteSome',
+                                deleteMethod: 'DELETE',
+                                insertUrl: '/create',
+                                insertMethod: 'PUT',
+                                updateUrl: '/update',
+                                updateMethod: 'POST',
+                                queryModel: {
+                                    page: 1
+                                }
+                            }, {
+                                name: "项目管理",
+                                url: "/project",
+                                queryUrl: '/list',
+                                queryMethod: 'GET',
+                                deleteUrl: '/deleteSome',
+                                deleteMethod: 'DELETE',
+                                insertUrl: '/create',
+                                insertMethod: 'PUT',
+                                updateUrl: '/update',
+                                updateMethod: 'POST',
+                                queryModel: {
+                                    page: 1
+                                }
+                            }, {
+                                name: "技能管理",
+                                url: "/skill",
+                                queryUrl: '/list',
+                                queryMethod: 'GET',
+                                deleteUrl: '/deleteSome',
+                                deleteMethod: 'DELETE',
+                                insertUrl: '/create',
+                                insertMethod: 'PUT',
+                                updateUrl: '/update',
+                                updateMethod: 'POST',
+                                queryModel: {
+                                    page: 1
+                                }
+                            }, {
+                                name: "社交主页",
+                                url: "/solcialPage",
+                                queryUrl: '/list',
+                                queryMethod: 'GET',
+                                deleteUrl: '/deleteSome',
+                                deleteMethod: 'DELETE',
+                                insertUrl: '/create',
+                                insertMethod: 'PUT',
+                                updateUrl: '/update',
+                                updateMethod: 'POST',
+                                queryModel: {
+                                    page: 1
+                                }
+                            }, {
+                                name: "资源管理",
+                                url: "/srcPath",
+                                queryUrl: '/list',
+                                queryMethod: 'GET',
+                                deleteUrl: '/deleteSome',
+                                deleteMethod: 'DELETE',
+                                insertUrl: '/create',
+                                insertMethod: 'PUT',
+                                updateUrl: '/update',
+                                updateMethod: 'POST',
+                            }, {
+                                name: "用户资源",
+                                url: "/srcUser",
+                                queryUrl: '/list',
+                                queryMethod: 'GET',
+                                deleteUrl: '/deleteSome',
+                                deleteMethod: 'DELETE',
+                                insertUrl: '/create',
+                                insertMethod: 'PUT',
+                                updateUrl: '/update',
+                                updateMethod: 'POST',
+                                queryModel: {
+                                    page: 1
+                                }
+                            }, {
+                                name: "用户管理",
+                                url: "/user",
+                                queryUrl: '/list',
+                                queryMethod: 'GET',
+                                deleteUrl: '/deleteSome',
+                                deleteMethod: 'DELETE',
+                                insertUrl: '/create',
+                                insertMethod: 'PUT',
+                                updateUrl: '/update',
+                                updateMethod: 'POST',
+                                queryModel: {
+                                    page: 1
+                                }
+                            }, {
+                                name: "工作经历",
+                                url: "/work",
+                                queryUrl: '/list',
+                                queryMethod: 'GET',
+                                deleteUrl: '/deleteSome',
+                                deleteMethod: 'DELETE',
+                                insertUrl: '/create',
+                                insertMethod: 'PUT',
+                                updateUrl: '/update',
+                                updateMethod: 'POST',
+                                queryModel: {
+                                    page: 1
+                                }
+                            }, {
+                                name: "访问信息",
+                                url: "/work",
+                                queryUrl: '/list',
+                                queryMethod: 'GET',
+                                deleteUrl: '/deleteSome',
+                                deleteMethod: 'DELETE',
+                                insertUrl: '/create',
+                                insertMethod: 'PUT',
+                                updateUrl: '/update',
+                                updateMethod: 'POST',
+                                queryModel: {
+                                    page: 1
+                                }
+                            }],
+                        }, {
+                            name: "访问信息",
+                            url: '',
+                            childModel: [{
+                                name: 'ip信息',
+                                url: '',
+                                queryUrl: '/ipInfo',
+                                queryMethod: 'GET'
+                            }, {
+                                name: '访问信息',
+                                url: '',
+                                queryUrl: '/accessInfo',
+                                queryMethod: 'GET'
+                            }]
+                        }]
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

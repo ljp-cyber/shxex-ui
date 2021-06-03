@@ -1,10 +1,10 @@
 {
-  "name": "@shxex/autobg",
+  "name": "shxex-ui",
   "version": "2.0.0",
   "description": "后台管理系统",
   "author": "李俊鹏",
   "private": false,
-  "main": "./dist/shxex-ui.js",
+  "main": "./packages/index.js",
   "files": [
     "dist/*",
     "lib/*",

@@ -1,6 +1,7 @@
 import autoCarousel from './src/auto-carousel'
 
 function init(Vue) {
+    console.log("autoCarousel")
     if (Vue) {
         Vue.component(autoCarousel.name, autoCarousel)
     }

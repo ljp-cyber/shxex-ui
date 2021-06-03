@@ -1,12 +1,18 @@
 <template>
   <div id="app">
-    <router-view />
+    <auto-home :routes="routes"></auto-home>
+    <!-- <router-view /> -->
   </div>
 </template>
 
 <script>
 export default {
   name: "App",
+  data(){
+    return{
+      routes:this.$router.options.routes
+    }
+  }
 };
 </script>
 

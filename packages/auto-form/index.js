@@ -5,6 +5,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 AutoForm.install = function (Vue) {
+  console.log("autoForm")
   Vue.component(AutoForm.name, AutoForm)
 }
 

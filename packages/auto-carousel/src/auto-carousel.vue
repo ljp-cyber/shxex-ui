@@ -213,6 +213,8 @@ export default {
           tempKey.indexOf("id") >= 0 ||
           tempKey.indexOf("role") >= 0 ||
           tempKey.indexOf("state") >= 0 ||
+          tempKey.indexOf("pk") >= 0 ||
+          tempKey.indexOf("password") >= 0 ||
           typeof val == "number"
         ) {
           // console.log("is unuseful");

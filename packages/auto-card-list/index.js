@@ -2,6 +2,7 @@ import autoCarousel from '../auto-carousel/index'
 import autoCardList from './src/auto-card-list'
 
 function init(Vue) {
+    console.log("autoCardList");
     if (Vue) {
         Vue.use(autoCarousel)
         Vue.component(autoCardList.name, autoCardList)

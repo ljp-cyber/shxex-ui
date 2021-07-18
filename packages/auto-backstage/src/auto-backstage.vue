@@ -189,8 +189,26 @@ export default {
         params: params,
         data: data,
         headers: {
-          Authorization: this.token,
+          Authorization: this.token,  
+          // Authorization: 'Basic c2FiZXI6c2FiZXJfc2VjcmV0',  
+          'Blade-Auth': this.token,
         },
+      })
+        .then(suc)
+        .catch(fail);
+    },
+    doAjaxProcess1(url, base, method, params, data, headers, suc, fail) {
+      // console.log("请求即将执行，url是：" + base + url);
+      // console.log("请求参数是：" + params);
+      // console.log("请求数据是：" + data);
+      // console.log("请求token是：" + this.token);
+      this.$axios({
+        method: method,
+        baseURL: base,
+        url: url,
+        params: params,
+        data: data,
+        headers: headers,
       })
         .then(suc)
         .catch(fail);
@@ -419,6 +437,7 @@ export default {
         let token = resData;
         if (typeof resData == "object") {
           token = resData.token;
+          token = resData['access_token'];
         }
         if (typeof token == "string" && !token.startsWith("Bearer ")) {
           that.token = "Bearer " + token;
@@ -431,12 +450,13 @@ export default {
         that.loginFormVisible = false;
       }
       let method = this.models.loginMethod ? this.models.loginMethod : "POST";
-      this.doAjaxProcess(
+      this.doAjaxProcess1(
         this.models.loginUrl,
         this.models.url,
         method,
         that.models.loginModel,
         that.models.loginModel,
+        that.models.loginHeaders,
         suc,
         this.failTips()
       );
